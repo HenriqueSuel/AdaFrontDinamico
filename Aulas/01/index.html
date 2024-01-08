@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <h1 id="nome">HENRIQUE SUEL</h1>
+
+    <!-- tags -->
+    <h2>Henrique</h2>
+    <h2>SUEL</h2>
+    <h2>HENRIQUE SUEL</h2>
+
+
+    <!-- Class -->
+    <h3 class="nomes">Henrique</h3>
+    <h3 class="nomes">Suel</h3>
+    <h3 class="nomes">Silva</h3>
+
+    <h1>0</h1>
+
+    <button onclick="alterarNome()">Somar + 1</button>
+    <button onclick="alterarNome()">Subtrair - 1</button>
+</body>
+
+
+<script>
+    // Func
+
+    function alterarNome() {
+        console.log('Chamou minha func alterarNome')
+    }
+
+
+    /*     console.log(document) */
+
+
+
+    // Pelo ID
+    const nome = document.getElementById('nome');
+    console.log(nome);
+
+    nome.innerHTML = 'Suel';
+
+
+    // TAG
+    const tag = document.getElementsByTagName('h2');
+
+    tag[0].innerHTML = 0;
+
+    // Class
+    const listaH3 = document.getElementsByClassName('nomes');
+
+     for (let index = 0; index < listaH3.length; index++) {
+        const count = index + 1;
+        console.log(listaH3[index].textContent)
+        console.log(listaH3[index].innerHTML)
+
+        listaH3[index].innerHTML = `${count} - ${listaH3[index].textContent}`
+
+
+        
+     }
+
+
+    
+
+</script>
+
+</html>
