@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <h1 id="count">0</h1>
+
+    <button onclick="somar()">+1</button>
+    <button onclick="subtrair()">-1</button>
+</body>
+
+<script>
+    function somar() {
+        const countElement = document.getElementById('count');
+
+        const value = Number(count.textContent);
+
+        countElement.innerHTML = value + 1;
+
+    }
+
+    function subtrair() {
+        const countElement = document.getElementById('count');
+
+        const value = Number(count.textContent);
+
+        if (value === 0) return;
+
+        countElement.innerHTML = value - 1;
+
+    }
+
+</script>
+
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form onsubmit="return validarFormulario()">
+        <label for="nome">Nome</label>
+        <input type="text" id="nome">
+        <span id="errorName"></span>
+        <input type="submit" value="Enviar">
+    </form>
+</body>
+
+<script>
+    function validarFormulario() {
+        
+       const nome = document.getElementById('nome');
+       const elementErrorName = document.getElementById('errorName');
+
+       if(nome.value.length > 3){
+        console.log('Tudo certo');
+        elementErrorName.innerHTML = ''
+        return false;
+       }
+
+
+       elementErrorName.innerHTML = 'O nome tem menos de 3 letras'
+
+       console.log(nome.value);
+        return false;
+    }
+</script>
+
+
+</html>
