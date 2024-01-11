@@ -38,11 +38,7 @@
         <div id="form-name">
             <label for="">nome</label>
             <input id="nome" type="text" class="input">
-
         </div>
-
-
-
         <button type="submit">Enviar</button>
     </form>
 </body>
@@ -50,7 +46,9 @@
 <script>
 
     function validarForm(event) {
-        event.preventDefault()
+        console.log(event);
+        event.preventDefault();
+
         const inputName = document.getElementById('nome');
         const formName = document.getElementById('form-name');
 

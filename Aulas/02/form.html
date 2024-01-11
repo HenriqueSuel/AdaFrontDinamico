@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <form onsubmit="enviarParaTabela(event)">
+        <div id="form-cpf">
+            <label for="">Nome</label>
+            <input id="nome" type="text" class="input">
+        </div>
+        <div id="form-cpf">
+            <label for="">CPF</label>
+            <input id="cpf" type="text" class="input" onkeydown="onlyNumber(event)" onkeyup="maskCPF(this)">
+        </div>
+        <button type="submit">Enviar</button>
+    </form>
+
+
+    <table border="1" border-color="blue">
+        <thead>
+            <tr>Nome</tr>
+            <tr>CPF</tr>
+            <tr>Telefone</tr>
+        </thead>
+
+        <tbody id="dados"></tbody>
+    </table>
+
+</body>
+
+
+<script>
+
+    function onlyNumber(event) {
+        console.log(event.key);
+        const blabla = /\D/g;
+
+
+        if(blabla.test(event.key) && event.key !== 'Backspace') {
+            event.preventDefault();
+        }
+    }
+
+    function maskCPF(inputCPF) {
+        const valorInput = inputCPF.value;
+
+        inputCPF.value = '.' + inputCPF.value;
+
+        // 999.999.999-99
+        
+
+    }
+
+    function enviarParaTabela(event){
+        event.preventDefault();
+
+        const nome = document.getElementById('nome');
+        const cpf = document.getElementById('cpf');
+
+
+        const tbody = document.getElementById('dados');
+
+        const row = tbody.insertRow();
+
+        const colunaNome = row.insertCell(0);
+        const colunaCPF = row.insertCell(1);
+
+        colunaNome.innerHTML = nome.value;
+        colunaCPF.innerHTML = cpf.value;
+        
+
+    }
+</script>
+
+</html>

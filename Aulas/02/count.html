@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .green {
+            color: green;
+        }
+        .red {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    
+    <h1 id="count">0</h1>
+
+    <button onclick="somar()">+1</button>
+    <button onclick="subtrair()">-1</button>
+</body>
+
+<script>
+    const count = document.getElementById('count');
+
+    function somar() {
+        count.innerHTML = Number(count.textContent) + 1;
+        cor();
+    }
+
+    function subtrair() {
+        count.innerHTML = Number(count.textContent) - 1;
+        cor();
+    }
+
+    function cor() {
+        const valorCountNumber = Number(count.textContent);
+        count.classList.toggle('green', valorCountNumber > 0)
+        count.classList.toggle('red', valorCountNumber < 0)
+    }
+</script>
+</html>
