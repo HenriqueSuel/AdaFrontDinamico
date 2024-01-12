@@ -38,26 +38,49 @@
 <script>
 
     function onlyNumber(event) {
-        console.log(event.key);
+
+        if (event.key === 'Backspace') {
+            return;
+        }
+
         const blabla = /\D/g;
 
 
-        if(blabla.test(event.key) && event.key !== 'Backspace') {
+        if (blabla.test(event.key) || event.target.value.length >= 14) {
             event.preventDefault();
         }
+
     }
 
     function maskCPF(inputCPF) {
-        const valorInput = inputCPF.value;
-
-        inputCPF.value = '.' + inputCPF.value;
-
         // 999.999.999-99
-        
+        // 012 456 790 11
+
+        // 999.999
+        // 999.999.999  //max 9 min 6
+        // 999.999.999-99  // MIN=9 MAX= 11
+        const value = inputCPF.value.replace(/\D/gm, '')
+
+
+        debugger;
+        if (value.length <= 3) {
+            inputCPF.value = value;
+        } else if (value.length > 3 && value.length <= 6) {
+            inputCPF.value = `${value.slice(0, 3)}.${value.slice(3, 6)}`
+        } else if (value.length > 6 && value.length <= 9) {
+            inputCPF.value = `${value.slice(0, 3)}.${value.slice(3, 6)}.${value.slice(6, 9)}`
+        } else if (value.length > 9 && value.length <= 11) {
+            inputCPF.value = `${value.slice(0, 3)}.${value.slice(3, 6)}.${value.slice(6, 9)}-${value.slice(9, 11)}`
+        }
+
+
+
+
+
 
     }
 
-    function enviarParaTabela(event){
+    function enviarParaTabela(event) {
         event.preventDefault();
 
         const nome = document.getElementById('nome');
@@ -73,7 +96,7 @@
 
         colunaNome.innerHTML = nome.value;
         colunaCPF.innerHTML = cpf.value;
-        
+
 
     }
 </script>
