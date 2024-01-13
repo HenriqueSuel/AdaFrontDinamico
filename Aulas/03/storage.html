@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <h1 id="nome"></h1>
+    <h1 id="count"></h1>
+
+    <button onclick="remover()">Remover</button>
+
+
+    <script>
+        const h1Nome = document.getElementById('nome');
+        const h1Count = document.getElementById('count');
+        // localStorage.setItem('nome', 'Henrique');
+        const nomeLocalStorage = localStorage.getItem('nome');
+
+
+        // sessionStorage.setItem('count', 2);
+
+        const countSessionStorage = sessionStorage.getItem('count');
+
+        h1Nome.innerHTML = nomeLocalStorage;
+        h1Count.innerHTML = countSessionStorage;
+
+
+        function remover() {
+            sessionStorage.clear()
+        }
+    </script>
+</body>
+
+</html>

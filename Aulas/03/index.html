@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <form onsubmit="enviarParaTabela(event)">
+        <div id="form-cpf">
+            <label for="">Nome</label>
+            <input id="nome" type="text" class="input">
+        </div>
+        <div id="form-cpf">
+            <label for="">CPF</label>
+            <input id="cpf" type="text" class="input" onkeydown="onlyNumber(event)" onkeyup="maskCPF(this)">
+        </div>
+        <button type="submit">Enviar</button>
+    </form>
+
+
+    <table border="1" border-color="blue">
+        <thead>
+            <tr>Nome</tr>
+            <tr>CPF</tr>
+            <tr>Acao</tr>
+        </thead>
+
+        <tbody id="dados"></tbody>
+    </table>
+
+</body>
+
+
+<script>
+    let count = 0;
+    let tabela = [];
+
+    function onlyNumber(event) {
+        if (event.key === 'Backspace') {
+            return;
+        }
+        const blabla = /\D/g;
+        if (blabla.test(event.key) || event.target.value.length >= 14) {
+            event.preventDefault();
+        }
+
+    }
+
+    function maskCPF(inputCPF) {
+        const value = inputCPF.value.replace(/\D/gm, '')
+
+        if (value.length <= 3) {
+            inputCPF.value = value;
+        } else if (value.length > 3 && value.length <= 6) {
+            inputCPF.value = `${value.slice(0, 3)}.${value.slice(3, 6)}`
+        } else if (value.length > 6 && value.length <= 9) {
+            inputCPF.value = `${value.slice(0, 3)}.${value.slice(3, 6)}.${value.slice(6, 9)}`
+        } else if (value.length > 9 && value.length <= 11) {
+            inputCPF.value = `${value.slice(0, 3)}.${value.slice(3, 6)}.${value.slice(6, 9)}-${value.slice(9, 11)}`
+        }
+    }
+
+    function enviarParaTabela(event) {
+        event.preventDefault();
+
+        const nome = document.getElementById('nome');
+        const cpf = document.getElementById('cpf');
+
+
+        addDadoTabela(nome.value, cpf.value);
+
+        const dados = {
+            nome: nome.value,
+            cpf: cpf.value,
+        }
+        debugger;
+
+        tabela.push(dados);
+        sessionStorage.setItem('tabela', JSON.stringify(tabela));
+
+    }
+
+    const tabelaLocal = sessionStorage.getItem('tabela');
+
+    if (tabelaLocal) {
+        tabela = JSON.parse(tabelaLocal);
+        tabela.forEach(element => {
+            addDadoTabela(element.nome, element.cpf)
+        });
+    }
+
+
+    function addDadoTabela(nome, cpf) {
+
+        count = count + 1;
+        const tbody = document.getElementById('dados');
+        const row = tbody.insertRow();
+        const colunaNome = row.insertCell(0);
+        const colunaCPF = row.insertCell(1);
+        const colunaAcao = row.insertCell(2);
+
+        colunaNome.innerHTML = nome;
+        colunaCPF.innerHTML = cpf;
+
+        const button = document.createElement('button');
+        button.textContent = 'Remover';
+
+        button.onclick = function () {
+            console.log(row.rowIndex);
+/*             tbody.deleteRow(count - 1); */
+
+        }
+
+        colunaAcao.appendChild(button)
+
+
+
+
+    }
+
+
+
+</script>
+
+</html>
