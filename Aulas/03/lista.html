@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .concluido {
+            color: green;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>ToDo List</h1>
+
+    <input type="text" id="input-tarefa">
+    <button onclick="adicionarTarefa()">Adicionar</button>
+
+    <ul id="lista-tarefas">
+    </ul>
+</body>
+
+<script>
+    let listaTarefas = [];
+
+    function adicionarTarefa() {
+        const inputTarefa = document.getElementById('input-tarefa');
+
+        const novaTarefa = { titulo: inputTarefa.value, concluida: false };
+
+        listaTarefas.push(novaTarefa);
+
+        atualizarLista();
+        localStorage.setItem('lista', JSON.stringify(listaTarefas));
+    }
+
+    function atualizarLista() {
+        const ul = document.getElementById('lista-tarefas');
+
+        ul.innerHTML = '';
+
+        listaTarefas.forEach((tarefa, index) => {
+            const li = document.createElement('li');
+
+            const button = document.createElement('button');
+
+            li.textContent = tarefa.titulo;
+
+            if(tarefa.concluida) {
+                li.classList.add('concluido');
+            }
+
+            button.textContent = 'Concluir';
+
+            button.onclick = () => concluirTarefa(index);
+
+            li.appendChild(button);
+            ul.appendChild(li);
+        });
+    }
+
+    function concluirTarefa(index) {
+        console.log(index,  listaTarefas[index]);
+        listaTarefas[index].concluida = !listaTarefas[index].concluida;
+        atualizarLista();
+        localStorage.setItem('lista', JSON.stringify(listaTarefas));
+    }
+
+    const listaTarefasLocalStorage = localStorage.getItem('lista');
+
+    if (listaTarefasLocalStorage) {
+        listaTarefas = JSON.parse(listaTarefasLocalStorage);
+        atualizarLista();
+
+
+    }
+</script>
+
+</html>
