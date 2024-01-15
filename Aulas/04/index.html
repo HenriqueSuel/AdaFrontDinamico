@@ -15,10 +15,32 @@
     onMount();
 
     async function onMount() {
-        const response = await fetch("https://pokeapi.co/api/v2/pokemon/ditto")
+
+        const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=10")
         const data = await response.json();
 
-        
+
+        data.results.forEach(async element => {
+            const resp = await fetch(element.url);
+            const poke = await resp.json();
+
+            console.log(poke);
+        });
+
+        // fetch("https://pokeapi.co/api/v2/pokemon?limit=10")
+        //     .then(response => response.json())
+        //     .then(data => {
+        //         fetch(data.url)
+        //             .then(resp => resp.json())
+        //             .then(poke => {
+        //                criarCardPoke(poke) 
+        //             })
+        //     })
+
+        /* const response = await fetch("https://pokeapi.co/api/v2/pokemon/ditto")
+        const data = await response.json();
+
+
         console.log(data);
 
         fetch("https://pokeapi.co/api/v2/pokemon/ditto")
@@ -33,9 +55,10 @@
                 <img src="${data.sprites.back_default}" alt="${data.name}" >
             `
 
-        CONTAINER.appendChild(card);
+        CONTAINER.appendChild(card); */
     }
 
+    
 
 
 
