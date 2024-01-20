@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div>
+        <h1>Criar</h1>
+        <label for="">Title</label>
+        <input id="title" type="text">
+        <label for="">Description</label>
+        <input id="description" type="text">
+        <button onclick="criarPost()">Criar</button>
+
+    </div>
+
+    <div>
+        <h1>Editar</h1>
+
+        <label for="">Title</label>
+        <input id="editar-title" type="text">
+        <label for="">Description</label>
+        <input id="editar-description" type="text">
+        <button onclick="updatePost()">Editar</button>
+    </div>
+
+
+    <h1>Posts</h1>
+    <ul id="lista-posts">
+    </ul>
+
+</body>
+
+<script>
+
+    const input = document.getElementById('title');
+    const description = document.getElementById('description');
+    const listaPost = document.getElementById('lista-posts');
+
+
+    async function criarPost() {
+        const data = {
+            title: input.value,
+            description: description.value
+        }
+
+        await fetch('http://localhost:3000/posts', {
+            method: 'POST',
+            body: JSON.stringify(data),
+        })
+
+        getListPost();
+
+    }
+
+
+    async function getListPost() {
+        const response = await fetch('http://localhost:3000/posts')
+        const lista = await response.json()
+
+        listaPost.innerHTML = '';
+
+        lista.forEach(item => {
+            const li = document.createElement('li');
+
+            console.log(item.id);
+            li.innerHTML = `
+                <div id="${item.id}">
+                    <p id="">${item.title}</p>
+                    <p>${item.description}</p>
+                    <button onclick="editar(${item.id})">Editar</button>
+                    <button onclick="deletar(${item.id})">Deletar</button>
+                </div>
+            `;
+
+            listaPost.appendChild(li);
+        });
+
+    }
+
+
+    function editar(id) {
+        const item = document.getElementById(id);
+
+        const valores = item.getElementsByTagName('p');
+
+        const title = valores[0].textContent;
+        const description = valores[1].textContent;
+
+        const editarTitle = document.getElementById('editar-title');
+        const editarDescription = document.getElementById('editar-description');
+
+
+        editarTitle.setAttribute('data-id', id);
+
+        editarTitle.value = title;
+        editarDescription.value = description;
+
+
+    }
+
+
+    async function deletar(id) {
+
+        await fetch(`http://localhost:3000/posts/${id}`, {
+            method: 'DELETE',
+        });
+
+        getListPost();
+
+    }
+
+    async function updatePost() {
+        const input = document.getElementById('editar-title');
+        const description = document.getElementById('editar-description');
+
+        const id = input.getAttribute('data-id')
+        const data = {
+            title: input.value,
+            description: description.value
+        }
+
+        await fetch(`http://localhost:3000/posts/${id}`, {
+            method: 'PUT',
+            body: JSON.stringify(data)
+        });
+
+        getListPost();
+    }
+
+    getListPost();
+
+</script>
+
+</html>
