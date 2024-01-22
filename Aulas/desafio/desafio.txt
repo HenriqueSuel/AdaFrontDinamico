@@ -1,0 +1,45 @@
+Primeira pagina
+Ter um botão de novo churrasco
+Quando clicar no botão deve mandar para uma nova tela
+Ter uma tabela (Data, Quantidade de Pessoas, Carne, Pão de alho, Carvão,Refri, Cerveja  e uma coluna de Ação)
+Na coluna ação teremos 2 botões 
+Um botão de Editar (Quando clicado vai para tela de editar)
+Um botão de excluir (Quando clicado deve remover a linha)
+
+Pagina de Criar um churrasco
+Um campo para indicar a quantidade de homens
+Um campo para indicar a quantidade de mulheres
+Um campo para indicar a quantidade de crianças
+Um botão de criar
+Quando clicar no botão deve fazer o calculo: 
+Carne
+0,4 KG por homem;
+0,32 KG por mulher;
+0,20 KG por criança;
+Pão de alho
+2 por adulto;
+1 por criança;
+Carvão
+1 KG por pessoa;
+Refrigerante
+1 garrafa de 2L a cada 5 pessoas;
+Cerveja
+3 garrafas de 600ml por pessoa (adultos)
+Assim q fizer o calculo deve chamar o endpoint para criar e salvar no json as info e voltar na tabela.
+Pagina de Editar um churrasco
+Um campo para indicar a quantidade de homens
+Um campo para indicar a quantidade de mulheres
+Um campo para indicar a quantidade de crianças
+Um botão de Salvar 
+Quando clicado deve refazer os calculos, depois salvar usando o endpoint e voltar para tela incial
+
+
+Critérios
+
+A calculadora deve funcionar corretamente e atender aos requisitos especificados;
+O código deve fazer uso de seletores e métodos para manipulação do DOM;
+O código deve fazer uso de adição e remoção de classes e estilização através do Javascript;
+O código deve fazer uso de eventos ligados aos elementos da página;
+O código deve fazer uso da api json (json-server)
+O código deve fazer uso de chamadas assíncronas e seus derivados.
+https://www.npmjs.com/package/json-server
